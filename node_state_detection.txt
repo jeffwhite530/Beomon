@@ -1,0 +1,28 @@
+Each compute node runs the daemon /opt/sam/beomon/bin/beomon_compute_agent.py 
+which first checks the health of the node, records information about the node 
+(e.g. number of CPUs) then "checks in" to the back-end MongoDB database running 
+on clusman.frank.sam.pitt.edu. This check-in simply updates a field in the 
+database with the current epoch time to signify the node is still alive and 
+running. The daemon then begins an infinite loop where it sleeps for 5 minutes, 
+checks that Infiniband is still working (to alert on failed switches), and 
+checks in to the database again.
+
+Each master node runs /opt/sam/beomon/bin/beomon_master_agent.py every 5 
+minutes via cron. This program calls bpstat for each node it was told to check 
+to see the node's status as bpmaster sees it. If bpstat claims a node is down 
+the master agent will determine when the node last checked in to the database 
+and if the node has checked in within the last 10 minutes the node is 
+considered "orphaned" and the program will set the node state to "offline" to 
+prevent further jobs from being scheduled on it. This is required as when a 
+node disconnects from its master for whatever reason, Scyld's "run to 
+completion" feature will allow the node to stay online and finish its tasks. 
+During the time the node is orphaned the master nodes (without Beomon) have no 
+way of knowing if the compute node is actually down, it just looks down from 
+their perspective when it could be orphaned or down.
+
+In addition to checking if a node is orphaned, the program will connect to its 
+parter (e.g. head0b is the partner of head0a) and check if the node is "up" on 
+it. If so the node is considered "partnered" and no action is taken. Otherwise 
+the node is considered "down". When a compute node has been down for 30 minutes 
+an alert is thrown for the NOC to manually reboot it. If the node has been an 
+orphan for more than 7 days a alert is thrown for the NOC to investigate.

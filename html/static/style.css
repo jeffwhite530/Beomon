@@ -1,0 +1,63 @@
+/*
+ * Description: Beomon status viewer's CSS
+*/
+
+
+
+
+
+/* General */
+* {
+    font-family: Helvetica;
+}
+
+body {
+    background-color: #CCCCCC;
+}
+
+
+.title {
+    text-align: center;
+    font-size: 20px;
+    color: #F6F2F2;
+}
+
+
+
+
+
+/* Tables */
+table {
+    margin: auto;
+    background: whitesmoke;
+    border-collapse: collapse;
+}
+
+table th, table thead th, table thead td {
+    border: 1px silver;
+    padding: 0.4em;
+    font-size: 15px;
+}
+
+table td {
+    border: 1px silver;
+    padding: 0.2em;
+    font-size: 14px;
+}
+
+table th {
+    background: #bcbfc2;
+}
+
+table tr:hover td {
+   background: mintcream !important;
+}
+
+table tr:nth-child(odd) {
+    background: gainsboro;
+}
+
+table caption {
+    margin-left: inherit;
+    margin-right: inherit;
+}

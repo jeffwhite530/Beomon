@@ -25,17 +25,7 @@ to be a possible master of node 10, one master will consider the node
 it up, boot or error.  Otherwise both masters consider it down
 or orphaned when no master is in control.
 
-Screenshots
------------
 
-The main page of the Web interface, showing overall cluster details:
-![Alt text](/screenshots/main.png?raw=true "Main")
-
-The compute node table, note the sticky table header and row highlight on hover:
-![Alt text](/screenshots/compute_node_table.png?raw=true "Compute Node Table")
-
-The details page of a compute node:
-![Alt text](/screenshots/compute_node.png?raw=true "Compute Node")
 
 Installation
 ------------

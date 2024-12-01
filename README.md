@@ -1,7 +1,7 @@
 Beomon
 ======
 
-DEFUNCT - This project is dead.  This code is old garbage, don't use it.
+DEFUNCT - This project is dead.
 
 
 
